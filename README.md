@@ -21,8 +21,8 @@ Each city that user searched will be saved, and they can view the weather of eac
 
 ## Link to Deployed Application
 
-Live: 
-Github repository: 
+Live: https://jamesgli520.github.io/Weather-Dashboard/
+Github repository: https://github.com/jamesgli520/Weather-Dashboard
 
 ## License & copyright
 

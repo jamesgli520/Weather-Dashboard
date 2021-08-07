@@ -13,6 +13,7 @@ var latitude, longtitude;
       })
       .then(function (data) {
         var date = new Date().toISOString().slice(0, 10);
+
         var dateATLEl = document.querySelector('#dateATL');
         var pElTemATL = document.querySelector('.temperatureATL');
         var pElHumATL = document.querySelector('.humidityATL');
@@ -26,10 +27,10 @@ var latitude, longtitude;
         if(data.current.uvi < 2){
           pElUVIndATL.innerHTML = 'UV index: '+data.current.uvi;
           pElUVIndATL.setAttribute('style','background-color:green');
-        }else if(data.current.uvi > 2 || data.current.uvi <=5){
+        }else if(data.current.uvi > 2 && data.current.uvi <=5){
           pElUVIndATL.innerHTML = 'UV index: '+data.current.uvi;
           pElUVIndATL.setAttribute('style','background-color:yellow');
-        }else if(data.current.uvi > 5 || data.current.uvi <=7){
+        }else if(data.current.uvi > 5 && data.current.uvi <=7){
           pElUVIndATL.innerHTML = 'UV index: '+data.current.uvi;
           pElUVIndATL.setAttribute('style','background-color:orange');
         }else{
@@ -54,17 +55,26 @@ function searchLatLon(){
           longtitude = data.coord.lon;
 
           if(latitude !== 'null' && longtitude !== 'null'){
-            //atlantaWeather();
             cityWeatherData();
-            localStorage.setItem(inputCityName.value, inputCityName.value)
-            var label1El = document.querySelector('.label1');
-            label1El.innerHTML = localStorage.getItem(inputCityName.value);
+
+            createCity(inputCityName.value);
+            
           }
 
       });
 }
 
+function createCity(city){
+  var cityList = document.querySelector('.city_list');
+  var label = document.createElement('label');
+  label.setAttribute('id', 'city');
+  cityList.appendChild(label);
 
+  var labelEl = document.querySelector('#city')
+  labelEl.innerHTML = city;
+
+
+}
 
 
 
@@ -132,10 +142,10 @@ function cityWeatherData(){
           if(data.current.uvi < 2){
             pElUVIndc.innerHTML = 'UV index Low: '+data.current.uvi;
             pElUVIndc.setAttribute('style','background-color:green');
-          }else if(data.current.uvi > 2 || data.current.uvi <=5){
+          }else if(data.current.uvi > 2 && data.current.uvi < 5){
             pElUVIndc.innerHTML = 'UV index Moderate: '+data.current.uvi;
             pElUVIndc.setAttribute('style','background-color:yellow');
-          }else if(data.current.uvi > 5 || data.current.uvi <=7){
+          }else if(data.current.uvi >= 5 && data.current.uvi <=7){
             pElUVIndc.innerHTML = 'UV index High: '+data.current.uvi
             pElUVIndc.setAttribute('style','background-color:orange');
           }else{
@@ -150,10 +160,10 @@ function cityWeatherData(){
           if(data.daily[0].uvi < 2){
             pElUVInd1.innerHTML = 'UV index Low: '+data.daily[0].uvi;
             pElUVInd1.setAttribute('style','background-color:green');
-          }else if(data.daily[0].wind_speed > 2 || data.current.uvi <=5){
+          }else if(data.daily[0].uvi > 2 && data.daily[0].uvi < 5){
             pElUVInd1.innerHTML = 'UV index Moderate: '+data.daily[0].uvi;
             pElUVInd1.setAttribute('style','background-color:yellow');
-          }else if(data.daily[0].wind_speed > 5 || data.current.uvi <=7){
+          }else if(data.daily[0].uvi >= 5 && data.daily[0].uvi <=7){
             pElUVInd1.innerHTML = 'UV index High: '+data.daily[0].uvi;
             pElUVInd1.setAttribute('style','background-color:orange');
           }else{
@@ -168,10 +178,10 @@ function cityWeatherData(){
           if(data.daily[1].uvi < 2){
             pElUVInd2.innerHTML = 'UV index Low: '+data.daily[1].uvi;
             pElUVInd2.setAttribute('style','background-color:green');
-          }else if(data.daily[1].uvi > 2 || data.daily[1].uvi <=5){
+          }else if(data.daily[1].uvi > 2 && data.daily[1].uvi <5){
             pElUVInd2.innerHTML = 'UV index Moderate: '+data.daily[1].uvi;
             pElUVInd2.setAttribute('style','background-color:yellow');
-          }else if(data.daily[1].uvi > 5 || data.daily[1].uvi <=7){
+          }else if(data.daily[1].uvi >= 5 && data.daily[1].uvi <=7){
             pElUVInd2.innerHTML = 'UV index High: '+data.daily[1].uvi;
             pElUVInd2.setAttribute('style','background-color:orange');
           }else{
@@ -183,13 +193,13 @@ function cityWeatherData(){
           pElTem3.innerHTML = "<img src='http://openweathermap.org/img/wn/"+data.daily[2].weather[0].icon+".png'>"+'Temperture: '+data.daily[2].temp.day +'&deg;C';
           pElHum3.innerHTML = 'Humidity: '+data.daily[2].humidity+'%';
           pElWind3.innerHTML = 'Wind Speed: '+data.daily[2].wind_speed;
-          if(data.daily[2] < 2){
+          if(data.daily[2].uvi < 2){
             pElUVInd3.innerHTML = 'UV index Low: '+data.daily[2].uvi;
             pElUVInd3.setAttribute('style','background-color:green');
-          }else if(data.daily[2] > 2 || data.daily[2].uvi <=5){
+          }else if(data.daily[2].uvi > 2 && data.daily[2].uvi < 5){
             pElUVInd3.innerHTML = 'UV index Moderate: '+data.daily[2].uvi;
             pElUVInd3.setAttribute('style','background-color:yellow');
-          }else if(data.daily[2] > 5 || data.daily[2].uvi <=7){
+          }else if(data.daily[2].uvi >= 5 && data.daily[2].uvi <=7){
             pElUVInd3.innerHTML = 'UV index High: '+data.daily[2].uvi;
             pElUVInd3.setAttribute('style','background-color:orange');
           }else{
@@ -205,10 +215,10 @@ function cityWeatherData(){
           if(data.daily[3].uvi < 2){
             pElUVInd4.innerHTML = 'UV index Low: '+data.daily[3].uvi;
             pElUVInd4.setAttribute('style','background-color:green');
-          }else if(data.daily[3].uvi > 2 || data.current.uvi <=5){
+          }else if(data.daily[3].uvi > 2 && data.daily[3].uvi < 5){
             pElUVInd4.innerHTML = 'UV index Moderate: '+data.daily[3].uvi;
             pElUVInd4.setAttribute('style','background-color:yellow');
-          }else if(data.daily[3].uvi > 5 || data.current.uvi <=7){
+          }else if(data.daily[3].uvi >= 5 && data.daily[3].uvi <=7){
             pElUVInd4.innerHTML = 'UV index High: '+data.daily[3].uvi;
             pElUVInd4.setAttribute('style','background-color:orange');
           }else{
@@ -223,10 +233,10 @@ function cityWeatherData(){
           if(data.daily[4].uvi < 2){
             pElUVInd5.innerHTML = 'UV index Low: '+data.daily[4].uvi;
             pElUVInd5.setAttribute('style','background-color:green');
-          }else if(data.daily[4].uvi > 2 || data.current.uvi <=5){
+          }else if(data.daily[4].uvi > 2 && data.daily[4].uvi < 5){
             pElUVInd5.innerHTML = 'UV index Moderate: '+data.daily[4].uvi;
             pElUVInd5.setAttribute('style','background-color:yellow');
-          }else if(data.daily[4].uvi > 5 || data.current.uvi <=7){
+          }else if(data.daily[4].uvi >= 5 && data.daily[4].uvi <=7){
             pElUVInd5.innerHTML = 'UV index High: '+data.daily[4].uvi;
             pElUVInd5.setAttribute('style','background-color:orange');
           }else{
