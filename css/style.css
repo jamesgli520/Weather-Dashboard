@@ -52,3 +52,11 @@ h1{
     font-size: 25px;
 }
 
+.form_div{
+    border: 2px sold lightgrey;
+    background-color: rgb(211, 211, 211, 0.7);
+}
+
+#searchButton, #cityInput{
+    font-size: 20px;
+}
