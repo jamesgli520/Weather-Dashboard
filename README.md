@@ -13,7 +13,8 @@ High, and severe.<br>
 Each city that user searched will be saved, and they can view the weather of each city just by click on the city name.<br>
 
 <p>
-    <img src="" /></br></br>
+    <img src="images\homepage.PNG" /></br></br>
+    <img src="images\data.PNG" /></br></br>
     
 </p>
 
