@@ -5,6 +5,8 @@ var cityNameList =  document.querySelector('#city_name');
 var divContainer = document.querySelector('#weekContainer');
 
 var latitude, longtitude;
+var countCity = 0;
+var changeCityName;
 
     var atlResponseURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.749&lon=-84.388&exclude=minutely,hourly,daily&units=metric&appid='+ APIKey;
     fetch(atlResponseURL)
@@ -66,19 +68,43 @@ function searchLatLon(){
 
 function createCity(city){
   var cityList = document.querySelector('.city_list');
-  var label = document.createElement('label');
-  label.setAttribute('id', 'city');
-  cityList.appendChild(label);
+  var buttonEl = buttonEl +''+city
+  buttonEl = document.createElement('button');
+  buttonEl.setAttribute('id', city);
+  buttonEl.setAttribute('style', 'font-size:25px')
+  buttonEl.innerText = city;
+  cityList.appendChild(buttonEl);
+  var button = button+''+city;
+  button = document.querySelector('#'+city);
+  
+  changeCityName = city;
+  localStorage.setItem(city, city);
+  
+  button.addEventListener('click', function(){
+    var latLonUrl = 'https://api.openweathermap.org/data/2.5/weather?q='+button.textContent+'&appid='+ APIKey;
+  
+    fetch(latLonUrl)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+            latitude = data.coord.lat;
+            longtitude = data.coord.lon;
 
-  var labelEl = document.querySelector('#city')
-  labelEl.innerHTML = city;
+            if(latitude !== 'null' && longtitude !== 'null'){
+              changeCityName = city;
+              cityWeatherData(city);
+              
+            }
 
+        });
 
+    });
 }
 
 
 
-function cityWeatherData(){
+function cityWeatherData(city){
   var responseURL = 'https://api.openweathermap.org/data/2.5/onecall?lat='+latitude+'&lon='+longtitude+'&exclude=minutely,hourly&units=metric&appid='+ APIKey;
 
   //current
@@ -134,7 +160,7 @@ function cityWeatherData(){
         console.log(data);
           var date = new Date().toISOString().slice(0, 10);
           
-          pElCityNameC.innerHTML = "<img src='http://openweathermap.org/img/wn/"+data.current.weather[0].icon+".png'>"+"City Name: "+inputCityName.value;
+          pElCityNameC.innerHTML = "<img src='http://openweathermap.org/img/wn/"+data.current.weather[0].icon+".png'>"+"City Name: "+changeCityName;
           h3ElDateCurrent.innerHTML=''+date;
           pElTemC.innerHTML = 'Temperture: '+data.current.temp +'&deg;C';
           pElHumC.innerHTML = 'Humidity: '+data.current.humidity +'%';
