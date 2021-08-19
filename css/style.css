@@ -16,26 +16,26 @@ h1{
     margin: auto;
 }
 
-.atl{
-    display: inline-block;
-    padding: 20px;
-    margin-left:10px ;
-    background-color: lightblue;
-    border-radius: 10px;
-    
-
+.cityName{
+    font-size: 35px;
 }
 
-.temperatureATL, .humidityATL, #dateATL
-, .windspeedATL, .UVIndexATL, .atl_h3{
+.temperautrecurrent, .humidityCurrent
+, .windspeedCurrent, .UVIndexCurrent, .cityName  {
     display: inline-block;
     color: black;
     font-weight: bold;
     padding-left: 15px;
 }
 
-.atl_div{
+.h3Current{
     text-align: center;
+}
+.h3Current{
+    padding: 20px;
+    margin-left:10px ;
+    background-color: rgb(152, 142, 243, 0.6);
+    border-radius: 10px;
 }
 .weekContainer{
     text-align: center;
